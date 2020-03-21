@@ -9,7 +9,7 @@ const WIDTH = 7;
 const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
-let board = makeBoard(HEIGHT, WIDTH); // array of rows, each row is array of cells  (board[y][x])
+let board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -17,7 +17,6 @@ let board = makeBoard(HEIGHT, WIDTH); // array of rows, each row is array of cel
 
 function makeBoard(height, width) {
   //creates the board array
-  const board = [];
   for (let h = 0; h < height; h++) {
     //creates rows
     const row = [];
@@ -78,7 +77,11 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for (let i = HEIGHT - 1; i >= 0; i--) {
+    if (board[i][x] === null) {
+      return i;
+    }
+  }
 }
 
 /** placeInBoard: place the player in the in memory board */
@@ -195,5 +198,5 @@ function checkForWin() {
   }
 }
 
-// makeBoard(HEIGHT, WIDTH);
+makeBoard(HEIGHT, WIDTH);
 makeHtmlBoard();
