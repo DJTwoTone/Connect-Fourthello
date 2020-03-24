@@ -1,37 +1,92 @@
+body {
+    background: #008C64;
+
+}
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* game board table */
 
-#board td {
-  width: 50px;
-  height: 50px;
-  border: solid 1px #666;
+#board {
+    border-collapse: collapse;
 }
+
+#board td {
+    width: 60px;
+    height: 60px;
+
+    border: solid 10px #D8B784;
+    padding: 10px #D8B784 solid;
+    box-shadow: 13px 13px 13px black
+}
+
+#board td:not(#column-top) {
+    
+}
+
+#white-player {
+    margin-right: 20px;
+    filter: invert(100%);
+}
+
+#black-player {
+    margin-left: 20px;
+}
+
+.glow {
+    box-shadow: 1px 1px 2px black, 0 0 25px black, 0 0 5px black;
+}
+
 
 /* pieces are div within game table cells: draw as colored circles */
 
 .piece {
-  /* TODO: make into circles */
-  margin: 5px;
-  width: 80%;
-  height: 80%;
-  border-radius: 50%;
+    /* TODO: make into circles */
+    margin: 5px;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
 }
 
 /* TODO: make pieces red/blue,  depending on player 1/2 piece */
 
 .p1 {
-  background-color: red;
+    left: 0;
+    box-sizing: border-box;
+    background-color: white;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px #404040, inset -3px -3px 5px gray;
 }
 
 .p2 {
-  background-color: blue;
+    box-sizing: border-box;
+    left: 0;
+    background-color: black;
+    width: 80%;
+    height: 80%;
+    border-radius: 50%;
+    box-shadow: 1px 1px 1px #404040;
+    background-image: -webkit-radial-gradient(40% 40%, circle closest-corner, #404040 0%, rgba(0, 0, 0, 0) 90%);
+    background-image: -moz-radial-gradient(40% 40%, circle closest-side, #404040 0%, rgba(0, 0, 0, 0) 90%);
 }
 
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-  border: dashed 1px lightgray;
+    border: dashed 1px lightgray;
 }
 
 #column-top td:hover {
-  background-color: gold;
+    background-color: gold;
 }
