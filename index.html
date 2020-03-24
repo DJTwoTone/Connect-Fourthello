@@ -1,20 +1,32 @@
 <!doctype html>
+
 <head>
   <title>Connect 4</title>
   <link href="connect4.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Ultra&display=swap" rel="stylesheet">
 </head>
+
 <body>
-<header>
+  <header>
+    <div>
+      <button id='dont'>DON'T PUSH</button>
+    </div>
     <h1>Connect Fourthello</h1>
-</header>
+    <div>
+      <button id="reset">RESET</button>
+    </div>
+  </header>
 
-<div id="game">
- <img src="img/noun_profile_413429.svg" alt="white player" id="white-player" class="glow">
-  <table id="board"></table>
-   <img src="img/noun_profile_413429.svg" alt="black player" id="black-player" class="glow">
-</div>
+  <div id="game">
+    <p id="player-1" class="glow">&#913;</p>
+    <table id="board"></table>
+    <p id="player-2">&#937;</p>
 
-<script src="connect4.js"></script>
+    <div id="win-overlay"></div>
+  </div>
+
+  <script src="connect4.js"></script>
 
 </body>
+
 </html>

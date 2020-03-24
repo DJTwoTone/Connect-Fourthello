@@ -102,7 +102,8 @@ function placeInTable(y, x) {
 /** endGame: announce game end */
 
 function endGame(msg) {
-  alert(msg);
+  const showWin = document.querySelector("#win-overlay");
+  showWin.innerText = `Player-${currPlayer} WINS!`;
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -142,8 +143,19 @@ const checkFilledBoard = () =>
     : null;
 
 /** switchPlayer: switches betwwen player 1 and 2*/
-const switchPlayer = () => (currPlayer === 1 ? currPlayer++ : currPlayer--);
+function switchPlayer() {
+  currPlayer === 1 ? currPlayer++ : currPlayer--;
+  const oneIndicator = document.querySelector("#player-1");
+  const twoIndicator = document.querySelector("#player-2");
 
+  if (currPlayer === 2) {
+    twoIndicator.classList.toggle("glow");
+    oneIndicator.classList.toggle("glow");
+  } else {
+    oneIndicator.classList.toggle("glow");
+    twoIndicator.classList.toggle("glow");
+  }
+}
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
 
 function checkForWin() {
@@ -166,24 +178,28 @@ function checkForWin() {
 
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
-      const horiz = [
+      //finds 4 matching horizontally
+        const horiz = [
         [y, x],
         [y, x + 1],
         [y, x + 2],
         [y, x + 3]
       ];
+        //finds 4 matching vertically
       const vert = [
         [y, x],
         [y + 1, x],
         [y + 2, x],
         [y + 3, x]
       ];
+        //finds 4 matching diagonally to the right
       const diagDR = [
         [y, x],
         [y + 1, x + 1],
         [y + 2, x + 2],
         [y + 3, x + 3]
       ];
+        //finds 4 matching diagonally to the left
       const diagDL = [
         [y, x],
         [y + 1, x - 1],
@@ -198,5 +214,31 @@ function checkForWin() {
   }
 }
 
+function reset() {
+  board = [];
+  const showWin = document.querySelector("#win-overlay");
+  showWin.innerText = "";
+  const toResetBoard = document.querySelector("#board");
+  toResetBoard.innerHTML = "";
+  makeBoard(HEIGHT, WIDTH);
+  makeHtmlBoard();
+}
+
+function handleReset() {
+  const resetBtn = document.querySelector("#reset");
+  resetBtn.addEventListener("click", reset);
+}
+
+function dont() {
+  alert("I TOLD YOU NOT TO!");
+}
+
+function handleDont() {
+  const dontBtn = document.querySelector("#dont");
+  dontBtn.addEventListener("click", dont);
+}
+
 makeBoard(HEIGHT, WIDTH);
 makeHtmlBoard();
+handleReset();
+handleDont();
