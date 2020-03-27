@@ -1,32 +1,30 @@
 body {
-    background: #008C64;
-    font-family: 'Ultra', serif;
-
-
+    background: #008c64;
+    font-family: "Ultra", serif;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.5rem
+    font-size: 1.5rem;
 }
 
 button {
     box-shadow: 13px 13px 13px black;
-	background:#D8B784;
-	background-color:#eae0c2;
-	border-radius:15px;
-	border:2px solid #333029;
-	display:inline-block;
-	cursor:pointer;
-	color: black;
-	font-family:'Ultra', serif;
-	font-size:14px;
-	font-weight:bold;
-	padding:12px 16px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
+    background: #d8b784;
+    background-color: #eae0c2;
+    border-radius: 15px;
+    border: 2px solid #333029;
+    display: inline-block;
+    cursor: pointer;
+    color: black;
+    font-family: "Ultra", serif;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 12px 16px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
 }
 
 #game {
@@ -45,17 +43,14 @@ button {
     width: 60px;
     height: 60px;
 
-    border: solid 10px #D8B784;
-    padding: 10px #D8B784 solid;
-    box-shadow: 13px 13px 13px black
+    border: solid 10px #d8b784;
+    padding: 10px #d8b784 solid;
+    box-shadow: 13px 13px 13px black;
 }
 
 p {
-
     font-size: 7em;
     text-shadow: 13px 13px 13px black;
-    
-    
 }
 
 #player-1 {
@@ -70,7 +65,6 @@ p {
 .glow {
     text-shadow: 5px 5px 10px gold, 0 0 50px gold, 0 0 10px gold;
 }
-
 
 /* pieces are div within game table cells: draw as colored circles */
 
@@ -102,27 +96,36 @@ p {
     height: 80%;
     border-radius: 50%;
     box-shadow: 1px 1px 1px #404040;
-    background-image: -webkit-radial-gradient(40% 40%, circle closest-corner, #404040 0%, rgba(0, 0, 0, 0) 90%);
-    background-image: -moz-radial-gradient(40% 40%, circle closest-side, #404040 0%, rgba(0, 0, 0, 0) 90%);
+    background-image: -webkit-radial-gradient(40% 40%,
+            circle closest-corner,
+            #404040 0%,
+            rgba(0, 0, 0, 0) 90%);
+    background-image: -moz-radial-gradient(40% 40%,
+            circle closest-side,
+            #404040 0%,
+            rgba(0, 0, 0, 0) 90%);
 }
 
 /* column-top is table row of clickable areas for each column */
 
 #column-top td {
-    border: solid 1px #D8B784;
+    border: solid 1px #d8b784;
     box-shadow: 0 0 13px #2f00ff;
 }
 
 #column-top td:hover {
     background-color: gold;
-
 }
 
 #column-top td:hover::after {
-    padding-left: 25px;
-    content: '\2193';
-    font-size: 3em;
+    content: "\2193";
     font-weight: 900;
+    cursor: pointer;
+    display: block;
+    font-size: 2.7em;
+    text-align: center;
+    width: 100%;
+
 }
 
 #win-overlay {
@@ -133,5 +136,5 @@ p {
     align-items: center;
     background-color: rgba(22, 22, 29, 0.7);
     color: rgb(233, 233, 227);
-    font-size: 9em
+    font-size: 9em;
 }
