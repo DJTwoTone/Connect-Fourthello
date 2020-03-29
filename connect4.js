@@ -101,9 +101,16 @@ function placeInTable(y, x) {
 
 /** endGame: announce game end */
 
-function endGame(msg) {
+function endGame() {
   const showWin = document.querySelector("#win-overlay");
   showWin.innerText = `Player-${currPlayer} WINS!`;
+}
+
+//tieGame: in the event of a tie
+
+function tieGame() {
+  const showTie = document.querySelector('#tie-overlay');
+  showTie.innerText = "YOU BOTH DISAPOINT ME!"
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -138,9 +145,9 @@ function handleClick(evt) {
 const checkFilledBoard = () =>
   board.flat().every(val => {
     return !val === null;
-  })
-    ? endGame()
-    : null;
+  }) ?
+  tieGame() :
+  null;
 
 /** switchPlayer: switches betwwen player 1 and 2*/
 function switchPlayer() {
@@ -166,11 +173,11 @@ function checkForWin() {
 
     return cells.every(
       ([y, x]) =>
-        y >= 0 &&
-        y < HEIGHT &&
-        x >= 0 &&
-        x < WIDTH &&
-        board[y][x] === currPlayer
+      y >= 0 &&
+      y < HEIGHT &&
+      x >= 0 &&
+      x < WIDTH &&
+      board[y][x] === currPlayer
     );
   }
 
@@ -179,27 +186,27 @@ function checkForWin() {
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
       //finds 4 matching horizontally
-        const horiz = [
+      const horiz = [
         [y, x],
         [y, x + 1],
         [y, x + 2],
         [y, x + 3]
       ];
-        //finds 4 matching vertically
+      //finds 4 matching vertically
       const vert = [
         [y, x],
         [y + 1, x],
         [y + 2, x],
         [y + 3, x]
       ];
-        //finds 4 matching diagonally to the right
+      //finds 4 matching diagonally to the right
       const diagDR = [
         [y, x],
         [y + 1, x + 1],
         [y + 2, x + 2],
         [y + 3, x + 3]
       ];
-        //finds 4 matching diagonally to the left
+      //finds 4 matching diagonally to the left
       const diagDL = [
         [y, x],
         [y + 1, x - 1],
