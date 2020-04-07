@@ -137,6 +137,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: rgba(22, 22, 29, 0.7);
   color: rgb(233, 233, 227);
   font-size: 9em;
@@ -148,7 +149,8 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   background-color: rgb(245, 232, 50);
   color: rgb(10, 23, 205);
-  font-size: 9em;
+  font-size: 7em;
 }

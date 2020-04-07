@@ -1,20 +1,11 @@
-/** Connect Four
- *
- * Player 1 and 2 alternate turns. On each turn, a piece is dropped down a
- * column until a player gets four-in-a-row (horiz, vert, or diag) or until
- * board fills (tie)
- */
-
+//hardcoded width and height of the board
 const WIDTH = 7;
 const HEIGHT = 6;
 
 let currPlayer = 1; // active player: 1 or 2
 let board = []; // array of rows, each row is array of cells  (board[y][x])
 
-/** makeBoard: create in-JS board structure:
- *    board = array of rows, each row is array of cells  (board[y][x])
- */
-
+//pushes an array representing the board to the hardcoded board
 function makeBoard(height, width) {
   //creates the board array
   for (let h = 0; h < height; h++) {
@@ -30,7 +21,7 @@ function makeBoard(height, width) {
   return board;
 }
 
-/** makeHtmlBoard: make HTML table and row of column tops. */
+//creates an html representation of the hardcoded board
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
@@ -54,7 +45,6 @@ function makeHtmlBoard() {
   // puts the top row on
   htmlBoard.append(top);
 
-  // TODO: add comment for this code
   // creates the HEIGHT number of rows
   for (let y = 0; y < HEIGHT; y++) {
     // creates a row
@@ -73,9 +63,10 @@ function makeHtmlBoard() {
   }
 }
 
-/** findSpotForCol: given column x, return top empty y (null if filled) */
+//finds the lowest spot in the selected column to place a players piece
 
 function findSpotForCol(x) {
+  //return null if the column is full
   // TODO: write the real version of this, rather than always returning 0
   for (let i = HEIGHT - 1; i >= 0; i--) {
     if (board[i][x] === null) {
@@ -84,14 +75,14 @@ function findSpotForCol(x) {
   }
 }
 
-/** placeInBoard: place the player in the in memory board */
+//puts the player's piece in the hardcoded board
 
 const placeInBoard = (y, x) => (board[y][x] = currPlayer);
 
-/** placeInTable: update DOM to place piece into HTML table of board */
+//puts the player's peiece in the HTML representation
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
+  // makes a div and inserts piece into correct table cell
   const htmlBoard = document.querySelector("#board");
   const gamePiece = document.createElement("div");
   gamePiece.classList.add("piece", `p${currPlayer}`);
@@ -99,21 +90,21 @@ function placeInTable(y, x) {
   cell.append(gamePiece);
 }
 
-/** endGame: announce game end */
+//announces a winner
 
 function endGame() {
   const showWin = document.querySelector("#win-overlay");
   showWin.innerText = `Player-${currPlayer} WINS!`;
 }
 
-//tieGame: in the event of a tie
+//announces a tie
 
 function tieGame() {
-  const showTie = document.querySelector('#tie-overlay');
-  showTie.innerText = "YOU BOTH DISAPOINT ME!"
+  const showTie = document.querySelector("#tie-overlay");
+  showTie.innerText = "YOU BOTH DISAPOINT ME!";
 }
 
-/** handleClick: handle click of column top to play piece */
+//handles players clicks
 
 function handleClick(evt) {
   // get x from ID of clicked cell
@@ -134,22 +125,23 @@ function handleClick(evt) {
   }
 
   // check for tie
-  checkFilledBoard();
+  if (checkFilledBoard()) {
+    console.log("tie");
+    tieGame();
+  }
   // switch players
 
-  // TODO: switch currPlayer 1 <-> 2
+  // switches currPlayer 1 <-> 2
   switchPlayer();
 }
-
-/** checkFilledBoard: checks if every element in the board is not set to null */
+//switch ? to if statement
+//checks if every element in the board is not set to null
 const checkFilledBoard = () =>
-  board.flat().every(val => {
-    return !val === null;
-  }) ?
-  tieGame() :
-  null;
+  board.flat().every((val) => {
+    return val !== null;
+  });
 
-/** switchPlayer: switches betwwen player 1 and 2*/
+//switches betwwen player 1 and 2
 function switchPlayer() {
   currPlayer === 1 ? currPlayer++ : currPlayer--;
   const oneIndicator = document.querySelector("#player-1");
@@ -163,7 +155,7 @@ function switchPlayer() {
     twoIndicator.classList.toggle("glow");
   }
 }
-/** checkForWin: check board cell-by-cell for "does a win start here?" */
+//checks board cell-by-cell for "does a win start here?"
 
 function checkForWin() {
   function _win(cells) {
@@ -173,15 +165,15 @@ function checkForWin() {
 
     return cells.every(
       ([y, x]) =>
-      y >= 0 &&
-      y < HEIGHT &&
-      x >= 0 &&
-      x < WIDTH &&
-      board[y][x] === currPlayer
+        y >= 0 &&
+        y < HEIGHT &&
+        x >= 0 &&
+        x < WIDTH &&
+        board[y][x] === currPlayer
     );
   }
 
-  // TODO: read and understand this code. Add comments to help you.
+  //read and understand this code. Add comments to help you.
 
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
@@ -190,30 +182,30 @@ function checkForWin() {
         [y, x],
         [y, x + 1],
         [y, x + 2],
-        [y, x + 3]
+        [y, x + 3],
       ];
       //finds 4 matching vertically
       const vert = [
         [y, x],
         [y + 1, x],
         [y + 2, x],
-        [y + 3, x]
+        [y + 3, x],
       ];
       //finds 4 matching diagonally to the right
       const diagDR = [
         [y, x],
         [y + 1, x + 1],
         [y + 2, x + 2],
-        [y + 3, x + 3]
+        [y + 3, x + 3],
       ];
       //finds 4 matching diagonally to the left
       const diagDL = [
         [y, x],
         [y + 1, x - 1],
         [y + 2, x - 2],
-        [y + 3, x - 3]
+        [y + 3, x - 3],
       ];
-
+      //checks for all possible winning situations
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
         return true;
       }
@@ -221,6 +213,7 @@ function checkForWin() {
   }
 }
 
+//resets the board
 function reset() {
   board = [];
   const showWin = document.querySelector("#win-overlay");
@@ -231,15 +224,28 @@ function reset() {
   makeHtmlBoard();
 }
 
+//handles a board reset
 function handleReset() {
   const resetBtn = document.querySelector("#reset");
   resetBtn.addEventListener("click", reset);
 }
 
+// 3 strikes and you're out
+let strikes = 0;
 function dont() {
-  alert("I TOLD YOU NOT TO!");
+  if (strikes === 0) {
+    alert("I TOLD YOU NOT TO!");
+    strikes++;
+  } else if (strikes === 1) {
+    alert("WHAT DID I SAY?!? DON'T CLICK IT");
+    strikes++;
+  } else {
+    alert("you were warned...");
+    reset();
+  }
 }
 
+//handles clicks on the don't button
 function handleDont() {
   const dontBtn = document.querySelector("#dont");
   dontBtn.addEventListener("click", dont);
